@@ -1,0 +1,13 @@
+#include <iostream>
+using namespace std;
+int random;
+int main()
+{
+    srand((unsigned)time(0));
+    for (int i=0; i < 100; i++)
+    {
+        random = (rand() % 100) + 1;
+        cout << "losowy numer od 1 do 100" << endl;
+        cout << random << endl;
+    }
+}
