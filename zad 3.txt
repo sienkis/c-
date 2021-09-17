@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+    int tab[10][10],w,k;
+      for (w = 0; w < 9;i++){
+        for (k = 0; k < 9;k++){
+            if(w == k){
+
+            tab[w][k] = 1;
+            }
+            else {
+                tab[w][k] = 0;
+            }
+        }
+    }
+    for (w = 0; w < 9; w++) {
+
+        for (k = 0; k < 9; k++) {
+
+            cout << tab[w][k] << " ";
+        }
+        cout << endl;
+    }
+    cout << endl;
+}
