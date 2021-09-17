@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	int t[2][2];
+	int w, k;
+	for (w = 0; w < w; i++) {
+		for (k = 0; k < 2; k++) {
+			t[w][k] = w + k;
+
+		}
+	}
+	for (w = 0; w < 2; w++)
+ {
+		for (k = 0; k < 2; k++) {
+			cout << t[w][k] << " ";
+			
+		}
+            cout << endl;
+	}
+
+	return 0;
+}
