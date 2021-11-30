@@ -1,0 +1,200 @@
+#include <iostream>
+#include <locale.h>
+#include <string.h>
+#include <string>
+using namespace std;
+int runda = 0;
+int nr_hero;//numer hero
+int nr_enemy;//numer enemy
+int k_skill;//który skill
+string skill1_name; int skill1_dmg; string skill2_name; int skill2_dmg; string skill3_name; int skill3_dmg; string skill4_name; int skill4_dmg;
+string hero_name; int hero_hp; int hero_dmg; int hero_mana; 
+string enemy_name; int enemy_hp; int enemy_dmg;
+string n_hero[10][5] = { {"KNIGHT","MIECZ","TARCZA"," SZARŻA","GŁÓWKA"},{"MAG OGNIA","FIREBALL","BONK Z PATYKA","OGIEŃ","KOP"},{"BARBARIAN","TOPÓR","SZARŻA","UGRYZIENIE","FURIA"},{"ASSASSIN","CICHY NÓŻ","ATAK Z ZASKOCZENIA","KATANA","USP-S"} ,{"PIRAT","KOKOS","BECZKA","PISTOLET SKAŁKOWY","SZABLA"} ,{"VALKIRIA","TOPÓR","RZUT TOPOREM","GŁÓWKA","KOP"} ,{"MAG LODU","LÓD","SOPEL","FREZZBALL","BONK Z PATYKA"} ,{"NINJA","KATANA","NÓŻ","PIĘŚCI","SKRĄCENIE KARKU"} ,{"RANGER","NÓŻ","STRZAŁA","KOP","LOKIEĆ"} ,{"ELMENEL","BUTELKA","DAJ PAN 5 ZŁ","KOP Z PÓŁ OBROTU","KASTET"}}; // tablica z nazwy herosów
+string n_enemy[10][1] = { {"DIABEŁ"},{"GNOM"},{"DRAGON"},{"ORK"} ,{"OGR"} ,{"PANDA"} ,{"WILK"} ,{"WILD LIS"} ,{"WRÓŻKA OGNIA"} ,{"WRÓŻKA LODU"} };//tablica z nazwy enemy
+int s_hero[10][6] = { {200,30,100,4,5,6},{160,35,100,9,6,4},{220,20,100,5,3,5},{150,40,100,7,9,4},{220,20,100,2,1,2},{300,15,100,5,3,8},{140,25,100,7,3,6},{100,45,100,5,4,3},{100,30,100,8,4,7},{1000,1000,100,50,70,30} }; //tablica z statystyki herosów
+int s_enemy[10][2] = { {250,2000},{140,20},{300,15},{300,10},{320,5},{10,0},{300,10},{200,20},{100,30},{100,30} }; //tablica z statystyki enemy
+void wybór_bohterów() {
+	cout << "1  - KNIGHT " << endl;
+	cout << "2  - MAG OGNIA" << endl;
+	cout << "3  - BARBARIAN " << endl;
+	cout << "4  - ASSASSIN" << endl;
+	cout << "5  - PIRAT" << endl;
+	cout << "6  - VALKIRIA" << endl;
+	cout << "7  - MAG LODU" << endl;
+	cout << "8  - NINJA" << endl;
+	cout << "9  - RANGER" << endl;
+	cout << "10 - ELMENEL" << endl;
+}
+void wybór_wrogów() {
+	cout << "1  - DIABEŁ" << endl;
+	cout << "2  - GNOM" << endl;
+	cout << "3  - DRAGON" << endl;
+	cout << "4  - ORK" << endl;
+	cout << "5  - OGR" << endl;
+	cout << "6  - PANDA" << endl;
+	cout << "7  - WILK" << endl;
+	cout << "8  - WILD LIS" << endl;
+	cout << "9  - WRÓŻKA OGNIA" << endl;
+	cout << "10 - WRÓŻKA LODU" << endl;
+}
+void wyb_hero() {
+	cout << "wybierz postać" << endl;
+	cin >> nr_hero;
+	cout << "wybrałes bohatera " << n_hero[nr_hero - 1][0] << endl;
+	cout << "hp= " << s_hero[nr_hero-1][0]<<" dmg= " << s_hero[nr_hero-1][1]<< " mana= " << s_hero[nr_hero-1][2] <<endl;
+};
+void wyb_enemy() {
+	cout << "wybierz przeciwnika" << endl;
+	cin >> nr_enemy;
+	cout << "wybrałes przciwnika " << n_enemy[nr_enemy - 2][1] << endl;
+	cout << "hp= " << s_enemy[nr_enemy-1][0] << " dmg= " << s_enemy[nr_enemy-1][1]<<endl;
+	system("pause");
+};
+void walka() {
+	hero_name = n_hero[nr_hero - 1][0];
+	hero_hp = s_hero[nr_hero-1][0];
+	hero_mana = s_hero[nr_hero-1][2];
+	skill1_name= n_hero[nr_hero - 1][1];
+	skill2_name = n_hero[nr_hero - 1][2];
+	skill3_name = n_hero[nr_hero - 1][3];
+	skill4_name = n_hero[nr_hero - 1][4];
+	skill1_dmg= s_hero[nr_hero - 1][1];
+	skill2_dmg= s_hero[nr_hero - 1][4] + skill1_dmg;
+	skill3_dmg= s_hero[nr_hero - 1][5] + skill1_dmg;
+	skill4_dmg= s_hero[nr_hero - 1][6] + skill1_dmg;
+	enemy_name = n_enemy[nr_enemy - 2][1];
+	enemy_hp = s_enemy[nr_enemy-1][0];
+    enemy_dmg= s_enemy[nr_enemy-1][1];
+runda = 0;
+	do {
+		runda++;
+		cout << endl;
+		cout << "RUNDA "<<runda << endl;
+		cout << "wybierz atak" << endl;
+		cin >> k_skill;
+		switch (k_skill)
+		{
+		case 1:
+			cout << "wybraleś " << skill1_name<<" " << endl;
+			break;
+		case 2:
+			cout << "wybraleś " << skill2_name << " " << endl;
+			break;
+		case 3:
+			cout << "wybraleś " << skill3_name << " " << endl;
+			break;
+		case 4:
+			cout << "wybraleś " << skill4_name << " " << endl;
+			break;
+		default:
+			cout << " nie ma takeigo ataku "<<endl;
+			break;
+		}
+		if (k_skill == 1) {
+			cout << hero_name << " zadaje " <<skill1_dmg << " obrazen " << enemy_name << endl;
+			enemy_hp = enemy_hp - skill1_dmg;
+			cout << enemy_name << " zadaje " << enemy_dmg << " obrazen " << hero_name << endl;
+			hero_hp = hero_hp - enemy_dmg;
+		}else if(k_skill == 2) {
+			if (hero_mana > skill2_dmg) {
+				cout << hero_name << " zadaje " << skill2_dmg << " obrazen " << enemy_name << endl;
+				enemy_hp = enemy_hp - skill2_dmg;
+				hero_mana = hero_mana - skill2_dmg;
+			}
+		else if (hero_mana <= skill2_dmg) {
+		    cout << "////////////////////////////////////////" << endl;
+			cout << "za mało many , użyto  ataku podstawowego" << endl;
+			cout << "////////////////////////////////////////" << endl;
+			cout << hero_name << " zadaje " << skill1_dmg << " obrazen " << enemy_name << endl;
+			enemy_hp = enemy_hp - skill1_dmg;
+		}
+			cout << enemy_name << " zadaje " << enemy_dmg << " obrazen " << hero_name << endl;
+			hero_hp = hero_hp - enemy_dmg;
+		}
+		else if(k_skill == 3) {
+			if (hero_mana > skill3_dmg) {
+				cout << hero_name << " zadaje " << skill3_dmg << " obrazen " << enemy_name << endl;
+				enemy_hp = enemy_hp - skill3_dmg;
+				hero_mana = hero_mana - skill3_dmg;
+			}
+			else if (hero_mana <= skill3_dmg) {
+				cout << "////////////////////////////////////////" << endl;
+				cout << "za mało many , użyto  ataku podstawowego" << endl;
+				cout << "////////////////////////////////////////" << endl;
+				cout << hero_name << " zadaje " << skill1_dmg << " obrazen " << enemy_name << endl;
+				enemy_hp = enemy_hp - skill1_dmg;
+			}
+			cout << enemy_name << " zadaje " << enemy_dmg << " obrazen " << hero_name << endl;
+			hero_hp = hero_hp - enemy_dmg;
+		}
+		else if (k_skill == 4) {
+			if (hero_mana > skill4_dmg) {
+				cout << hero_name << " zadaje " << skill4_dmg << " obrazen " << enemy_name << endl;
+				enemy_hp = enemy_hp - skill4_dmg;
+				hero_mana = hero_mana - skill4_dmg;
+			cout << enemy_name << " zadaje " << enemy_dmg << " obrazen " << hero_name << endl;
+			hero_hp = hero_hp - enemy_dmg;
+			}
+			else if (hero_mana <= skill4_dmg) {
+				cout << "////////////////////////////////////////" << endl;
+				cout << "za mało many , użyto  ataku podstawowego" << endl;
+				cout << "////////////////////////////////////////" << endl;
+				cout << hero_name << " zadaje " << skill1_dmg << " obrazen " << enemy_name << endl;
+				enemy_hp = enemy_hp - skill1_dmg;
+			}
+		}
+		if (hero_hp > 0 && enemy_hp > 0) {
+			cout <<"bohaterowi "<< hero_name << " zostało " << hero_hp << " hp " << endl;
+			cout << "bohaterowi " << hero_name << " zostało " << hero_mana <<" many"<< endl;
+			cout << "przeciwnikowi " << enemy_name <<" zostało " << enemy_hp << " hp"<<endl;
+		}else {
+			if (hero_hp > enemy_hp) {
+				cout << endl;
+				cout << "wygrał " << hero_name << endl;
+				cout << endl;
+			}
+			else if(hero_hp<enemy_hp){
+				cout << endl;
+				cout << "wygrał " << enemy_name << endl;
+				cout << endl;
+			}
+			if (hero_hp <= 0) {
+				cout << "twój bohater nie żyje " << endl << "GAME OVER" << endl;
+				exit(1);
+			}
+		}
+		system("pause");
+	
+	} while (hero_hp >= 0 && enemy_hp >= 0);
+};
+void wybór_skilli() {
+	skill1_name = n_hero[nr_hero - 1][1];
+	skill2_name = n_hero[nr_hero - 1][2];
+	skill3_name = n_hero[nr_hero - 1][3];
+	skill4_name = n_hero[nr_hero - 1][4];
+	cout << "1  - " << skill1_name <<" (bron podstawowa nie zużywa many)" << endl;
+	cout << "2  - " << skill2_name << endl;
+	cout << "3  - " << skill3_name << endl;
+	cout << "4  - " << skill4_name << endl;
+}
+int main()
+{
+	setlocale(LC_CTYPE, "Polish");
+	wybór_bohterów();
+	cout << endl;
+	wyb_hero();
+	for (int i = 0; i < 6; i++) {
+		cout << endl;
+		cout << "[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[|" << endl;
+		cout << "                   POJEDYNEK " << i+1 << endl;
+		cout << "[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[|"<<endl;
+		wybór_wrogów();
+		cout << endl;
+		wyb_enemy();
+		cout << endl;
+		wybór_skilli();
+		walka();
+	}
+};
+
